@@ -21,7 +21,7 @@ function readFile(obj) {
     reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function (e) {
-        alert(this.result); //就是base64
+        alert(this.result); // 就是base64
     }
 }
 
