@@ -1,6 +1,7 @@
 import {each} from './utils'
 
 // 给元素增加内联样式
+// todo 考虑前缀的情况
 function insertStyle(el, styleObj) {
     if (!el) {
         throw new Error('invalid argument: el cannot be empty')
