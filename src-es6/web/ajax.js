@@ -1,4 +1,4 @@
-import {serialize, addDataToUrl} from '../util/utils'
+import {serialize, addDataToUrl} from '../util/urlUtils'
 
 // 只能进行异步处理（这是出于简单化的考虑，只实现最常用的功能）
 class Ajax {

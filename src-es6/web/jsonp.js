@@ -1,4 +1,4 @@
-import {addDataToUrl} from '../util/utils'
+import {addDataToUrl} from '../util/urlUtils'
 
 class Jsonp {
     constructor() {
