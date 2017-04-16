@@ -1,3 +1,5 @@
+import {isEmptyObj} from './typeUtils'
+
 // 将url中的查询参数解析成对象
 function urlParse() {
     let url = window.location.search
@@ -15,4 +17,29 @@ function urlParse() {
     return obj
 }
 
-export {urlParse}
+// 将对象转为表单请求字符串
+function serialize(obj) {
+    let str = ''
+
+    each(obj, function (val, key) {
+        str += `${key}=${val}&`
+    })
+
+    return str && str.slice(0, -1)
+}
+
+// 把数据拼接到URL上
+function addDataToUrl(data, url) {
+    if (data && !isEmptyObj(data)) {
+        let str = serialize(data)
+        if (url.indexOf('?') === -1) {
+            url += '?' + str
+        } else {
+            url += "&" + str
+        }
+    }
+
+    return url
+}
+
+export {urlParse, serialize, addDataToUrl}

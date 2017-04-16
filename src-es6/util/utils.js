@@ -1,4 +1,4 @@
-import {isArray, isEmptyObj} from './typeUtils'
+import {isArray} from './typeUtils'
 
 function each(obj, fn) {
     if (!obj || !fn) return
@@ -31,29 +31,18 @@ function extendObj(targetObj, obj, isOverwrite) {
     return targetObj
 }
 
-// 将对象转为表单请求字符串
-function serialize(obj) {
-    let str = ''
-
-    each(obj, function (val, key) {
-        str += `${key}=${val}&`
-    })
-
-    return str && str.slice(0, -1)
-}
-
-// 把数据拼接到URL上
-function addDataToUrl(data, url) {
-    if (data && !isEmptyObj(data)) {
-        let str = serialize(data)
-        if (url.indexOf('?') === -1) {
-            url += '?' + str
-        } else {
-            url += "&" + str
-        }
+function bindTouchEvent(option) {
+    var el = option.el
+    if (!el) {
+        throw new Error('Invalid argument: el(property) cannot be empty')
+    } else if (typeof el === 'string') {
+        el = document.querySelector(el)
     }
 
-    return url
+    var typeArr = ['touchstart', 'touchmove', 'touchend']
+    typeArr.forEach(function (eventType) {
+        el.addEventListener(eventType, option[eventType])
+    })
 }
 
-export {each, extendObj, serialize, addDataToUrl}
+export {each, extendObj, bindTouchEvent}
