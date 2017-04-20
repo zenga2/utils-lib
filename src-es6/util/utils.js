@@ -18,7 +18,7 @@ function each(obj, fn) {
 
 // 扩展对象
 function extendObj(targetObj, obj, isOverwrite) {
-    isOverwrite = isOverwrite || false;
+    isOverwrite = isOverwrite || true
     let keys = Object.keys(obj)
 
     for (let i = 0, len = keys.length; i < len; i++) {
