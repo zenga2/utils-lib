@@ -3,7 +3,7 @@ import {isArray} from './typeUtils'
 function each(obj, fn) {
     if (!obj || !fn) return
 
-    if (isArray) {
+    if (isArray(obj)) {
         for (let i = 0, len = obj.length; i < len; i++) {
             if (fn.call(obj, obj[i], i) === false) return
         }

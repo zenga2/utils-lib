@@ -7,7 +7,7 @@ define(function (require, exports, module) {
         var len;
         var keys;
 
-        if (isArray) {
+        if (isArray(obj)) {
             for (i = 0, len = obj.length; i < len; i++) {
                 if (fn.call(obj, obj[i], i) === false) return;
             }
