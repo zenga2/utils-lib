@@ -53,4 +53,30 @@ function bindTouchEvent(option) {
     })
 }
 
-export {each, extendObj, bindTouchEvent}
+// 让fn2在fn1执行完后执行,
+// 同时确保fn2的等待时间至少为minInterval
+function executeAfter(fn1, fn2, minInterval) {
+    minInterval = minInterval || 0;
+    let isDone = false;
+    let isTimeout = false;
+
+    setTimeout(function () {
+        // fn1已经执行完了
+        if (isDone) {
+            fn2()
+        } else {
+            isTimeout = true
+        }
+
+    }, minInterval)
+
+    fn1(function () {
+        if (isTimeout) {
+            fn2()
+        } else {
+            isDone = true
+        }
+    })
+}
+
+export {each, extendObj, bindTouchEvent, executeAfter}
