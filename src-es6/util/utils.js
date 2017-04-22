@@ -20,11 +20,19 @@ function each(obj, fn) {
 function extendObj(targetObj, obj, isOverwrite) {
     isOverwrite = isOverwrite || true
     let keys = Object.keys(obj)
+    let len = keys.length
 
-    for (let i = 0, len = keys.length; i < len; i++) {
-        let key = keys[i]
-        if (isOverwrite || !(key in targetObj)) {
+    if (isOverwrite) {
+        for (let i = 0; i < len; i++) {
+            let key = keys[i]
             targetObj[key] = obj[key]
+        }
+    } else {
+        for (let i = 0; i < len; i++) {
+            let key = keys[i]
+            if (!(key in targetObj)) {
+                targetObj[key] = obj[key]
+            }
         }
     }
 
@@ -32,14 +40,14 @@ function extendObj(targetObj, obj, isOverwrite) {
 }
 
 function bindTouchEvent(option) {
-    var el = option.el
+    let el = option.el
     if (!el) {
         throw new Error('Invalid argument: el(property) cannot be empty')
     } else if (typeof el === 'string') {
         el = document.querySelector(el)
     }
 
-    var typeArr = ['touchstart', 'touchmove', 'touchend']
+    let typeArr = ['touchstart', 'touchmove', 'touchend']
     typeArr.forEach(function (eventType) {
         el.addEventListener(eventType, option[eventType])
     })

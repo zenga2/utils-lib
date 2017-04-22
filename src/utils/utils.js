@@ -3,15 +3,18 @@ define(function (require, exports, module) {
 
     function each(obj, fn) {
         if (!obj || !fn) return;
+        var i;
+        var len;
+        var keys;
 
         if (isArray) {
-            for (let i = 0, len = obj.length; i < len; i++) {
+            for (i = 0, len = obj.length; i < len; i++) {
                 if (fn.call(obj, obj[i], i) === false) return;
             }
         } else {
-            let keys = Object.keys(obj);
-            for (let i = 0, len = keys.length; i < len; i++) {
-                let k = keys[i];
+            keys = Object.keys(obj);
+            for (i = 0, len = keys.length; i < len; i++) {
+                var k = keys[i];
                 if (fn.call(obj, obj[k], k) === false) return;
             }
         }
@@ -20,12 +23,22 @@ define(function (require, exports, module) {
     // 扩展对象
     function extendObj(targetObj, obj, isOverwrite) {
         isOverwrite = isOverwrite || true;
-        let keys = Object.keys(obj);
+        var keys = Object.keys(obj);
+        var len = keys.length;
+        var key;
+        var i;
 
-        for (let i = 0, len = keys.length; i < len; i++) {
-            let key = keys[i];
-            if (isOverwrite || !(key in targetObj)) {
+        if (isOverwrite) {
+            for (i = 0; i < len; i++) {
+                key = keys[i];
                 targetObj[key] = obj[key];
+            }
+        } else {
+            for (i = 0; i < len; i++) {
+                key = keys[i];
+                if (!(key in targetObj)) {
+                    targetObj[key] = obj[key];
+                }
             }
         }
 
