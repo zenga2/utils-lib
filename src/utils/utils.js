@@ -59,10 +59,36 @@ define(function (require, exports, module) {
         })
     }
 
+    // 让fn2在fn1执行完后执行,可以给fn1的执行时间设置一个最小时间间隔
+    function executeAfter(fn1, fn2, minInterval) {
+        minInterval = minInterval || 0;
+        var isDone = false;
+        var isTimeout = false;
+
+        setTimeout(function () {
+            // fn1已经执行完了
+            if (isDone) {
+                fn2();
+            } else {
+                isTimeout = true;
+            }
+
+        }, minInterval);
+
+        fn1(function () {
+            if (isTimeout) {
+                fn2();
+            } else {
+                isDone = true;
+            }
+        })
+    }
+
     module.exports = {
         each: each,
         extendObj: extendObj,
-        bindTouchEvent: bindTouchEvent
+        bindTouchEvent: bindTouchEvent,
+        executeAfter: executeAfter
     }
 })
 
