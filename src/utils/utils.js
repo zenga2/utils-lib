@@ -59,7 +59,8 @@ define(function (require, exports, module) {
         })
     }
 
-    // 让fn2在fn1执行完后执行,可以给fn1的执行时间设置一个最小时间间隔
+    // 让fn2在fn1执行完后执行,
+    // 同时确保fn2的等待时间至少为minInterval
     function executeAfter(fn1, fn2, minInterval) {
         minInterval = minInterval || 0;
         var isDone = false;
