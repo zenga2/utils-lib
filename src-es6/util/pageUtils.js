@@ -1,7 +1,6 @@
 import {each} from './utils'
 
 // 给元素设置内联样式
-// todo 考虑前缀的情况
 function setCss(el, styleObj) {
     if (!el) {
         throw new Error('invalid argument: el cannot be empty')
