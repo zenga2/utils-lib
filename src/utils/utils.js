@@ -85,11 +85,27 @@ define(function (require, exports, module) {
         })
     }
 
+    function log(msg, i) {
+        var logEl = document.createElement('div');
+        document.body.insertBefore(logEl, document.body.firstElementChild);
+        logEl.style.borderBottom = '1px solid #c1c2c3';
+        logEl.style.paddingTop = '10px';
+
+        if (i) {
+            localStorage.setItem('couter', i);
+        }
+        var couter = Number(localStorage.getItem('couter')) || 0;
+        alert(couter);
+
+        logEl.textContent = msg;
+    }
+
     module.exports = {
         each: each,
         extendObj: extendObj,
         bindTouchEvent: bindTouchEvent,
-        executeAfter: executeAfter
+        executeAfter: executeAfter,
+        log
     }
 })
 
