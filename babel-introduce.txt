@@ -52,9 +52,7 @@
          "lint": "eslint src-es6 && eslint src && eslint test"
       }
 
-
-
-  5、.eslintrc.js配置模板
+    5、.eslintrc.js配置模板
       module.exports = {
           root: true,
           parser: 'babel-eslint',
