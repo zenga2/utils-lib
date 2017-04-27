@@ -79,4 +79,15 @@ function executeAfter(fn1, fn2, minInterval) {
     })
 }
 
-export {each, extendObj, bindTouchEvent, executeAfter}
+function animation(workFn, duration) {
+    let startTime = +(new Date);
+    requestAnimationFrame(function step() {
+        var currTime = +(new Date);
+        workFn((currTime - startTime) / duration);
+        if (currTime < duration) {
+            requestAnimationFrame(step);
+        }
+    });
+}
+
+export {each, extendObj, bindTouchEvent, executeAfter,animation}

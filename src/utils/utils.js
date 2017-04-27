@@ -101,12 +101,24 @@ define(function (require, exports, module) {
         logEl.textContent = msg;
     }
 
+    function animation(workFn, duration) {
+        var startTime = +(new Date);
+        requestAnimationFrame(function step() {
+            var currTime = +(new Date);
+            workFn((currTime - startTime) / duration);
+            if (currTime < duration) {
+                requestAnimationFrame(step);
+            }
+        });
+    }
+
     module.exports = {
         each: each,
         extendObj: extendObj,
         bindTouchEvent: bindTouchEvent,
         executeAfter: executeAfter,
-        log
+        log: log,
+        animation: animation
     }
 })
 
