@@ -14,3 +14,10 @@ if (test1 && test2) {
 }
 
 console.log(dateStr1, test1, ' | ', dateStr2, test2)
+
+// 标准版: http://218.17.161.51:12227/m/index.html
+// 国海推广: http://sj.qq.com/myapp/detail.htm?apkName=com.ghzq.fxc.mkt
+// 民生掌赢: http://sj.qq.com/myapp/detail.htm?apkName=com.minsheng.fxc.mkt
+
+// 民生快速开户: http://sj.qq.com/myapp/detail.htm?apkName=com.thinkive.mobile.account_ms
+// 华龙掌上业务平台: http://sj.qq.com/myapp/detail.htm?apkName=com.thinkive.mobile.account_hljzg
