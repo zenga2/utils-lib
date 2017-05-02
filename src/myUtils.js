@@ -325,7 +325,7 @@ var whenReady = (function () {
 })();
 
 // 扩展对象
-function extendObj(targetObj, obj, isOverwrite) {
+function extend(targetObj, obj, isOverwrite) {
     isOverwrite = isOverwrite || true;
     var key;
 
@@ -348,7 +348,7 @@ function ajax(url, options) {
         },
         dataType: "json"
     };
-    options = extendObj((options || {}), defaultOptions);
+    options = extend((options || {}), defaultOptions);
     var headKey;
     var headers = options.headers;
     var dataStr = null;

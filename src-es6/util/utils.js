@@ -17,7 +17,7 @@ function each(obj, fn) {
 }
 
 // 扩展对象
-function extendObj(targetObj, obj, isOverwrite) {
+function extend(targetObj, obj, isOverwrite) {
     isOverwrite = isOverwrite || true
     let keys = Object.keys(obj)
     let len = keys.length
@@ -90,4 +90,4 @@ function animation(workFn, duration) {
     });
 }
 
-export {each, extendObj, bindTouchEvent, executeAfter,animation}
+export {each, extend, bindTouchEvent, executeAfter,animation}

@@ -21,7 +21,7 @@ define(function (require, exports, module) {
     }
 
     // 扩展对象
-    function extendObj(targetObj, obj, isOverwrite) {
+    function extend(targetObj, obj, isOverwrite) {
         isOverwrite = isOverwrite || true;
         var keys = Object.keys(obj);
         var len = keys.length;
@@ -114,7 +114,7 @@ define(function (require, exports, module) {
 
     module.exports = {
         each: each,
-        extendObj: extendObj,
+        extend: extend,
         bindTouchEvent: bindTouchEvent,
         executeAfter: executeAfter,
         log: log,
