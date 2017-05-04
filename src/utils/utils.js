@@ -21,9 +21,9 @@ define(function (require, exports, module) {
     }
 
     // 扩展对象
-    function extend(targetObj, obj, isOverwrite) {
+    function extend(target, source, isOverwrite) {
         isOverwrite = isOverwrite || true;
-        var keys = Object.keys(obj);
+        var keys = Object.keys(source);
         var len = keys.length;
         var key;
         var i;
@@ -31,18 +31,18 @@ define(function (require, exports, module) {
         if (isOverwrite) {
             for (i = 0; i < len; i++) {
                 key = keys[i];
-                targetObj[key] = obj[key];
+                target[key] = source[key];
             }
         } else {
             for (i = 0; i < len; i++) {
                 key = keys[i];
-                if (!(key in targetObj)) {
-                    targetObj[key] = obj[key];
+                if (!(key in target)) {
+                    target[key] = source[key];
                 }
             }
         }
 
-        return targetObj;
+        return target;
     }
 
     function bindTouchEvent(option) {
