@@ -17,26 +17,26 @@ function each(obj, fn) {
 }
 
 // 扩展对象
-function extend(targetObj, obj, isOverwrite) {
+function extend(target, source, isOverwrite) {
     isOverwrite = isOverwrite || true
-    let keys = Object.keys(obj)
+    let keys = Object.keys(source)
     let len = keys.length
 
     if (isOverwrite) {
         for (let i = 0; i < len; i++) {
             let key = keys[i]
-            targetObj[key] = obj[key]
+            target[key] = source[key]
         }
     } else {
         for (let i = 0; i < len; i++) {
             let key = keys[i]
-            if (!(key in targetObj)) {
-                targetObj[key] = obj[key]
+            if (!(key in target)) {
+                target[key] = source[key]
             }
         }
     }
 
-    return targetObj
+    return target
 }
 
 function bindTouchEvent(option) {
