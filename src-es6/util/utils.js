@@ -82,9 +82,10 @@ function executeAfter(fn1, fn2, minInterval) {
 function animation(workFn, duration) {
     let startTime = +(new Date);
     requestAnimationFrame(function step() {
-        var currTime = +(new Date);
-        workFn((currTime - startTime) / duration);
-        if (currTime < duration) {
+        let currTime = +(new Date);
+        let ratio = (currTime - startTime) / duration;
+        workFn(ratio);
+        if (ratio <= 1) {
             requestAnimationFrame(step);
         }
     });

@@ -105,8 +105,9 @@ define(function (require, exports, module) {
         var startTime = +(new Date);
         requestAnimationFrame(function step() {
             var currTime = +(new Date);
-            workFn((currTime - startTime) / duration);
-            if (currTime < duration) {
+            var ratio = (currTime - startTime) / duration;
+            workFn(ratio);
+            if (ratio <= 1) {
                 requestAnimationFrame(step);
             }
         });
