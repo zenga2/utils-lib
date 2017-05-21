@@ -15,7 +15,7 @@ class Jsonp {
         this.fnName = 'func' + this.count
     }
 
-    get(url, data, option) {
+    get(url, data = {}, option) {
         option = Object.assign({}, option, this.defaultOpt)
 
         function clean() {
@@ -34,7 +34,6 @@ class Jsonp {
                 clean()
             }, option.timeout)
 
-            data = data || {}
             data.jsonp = '__jsonp__.' + fnName
             url = addDataToUrl(data, url)
             this.increment()
