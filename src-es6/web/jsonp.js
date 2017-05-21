@@ -16,7 +16,7 @@ class Jsonp {
     }
 
     get(url, data = {}, option) {
-        option = Object.assign({}, option, this.defaultOpt)
+        option = Object.assign({}, this.defaultOpt, option)
 
         function clean() {
             option.ajaxCompleteFn && option.ajaxCompleteFn()
