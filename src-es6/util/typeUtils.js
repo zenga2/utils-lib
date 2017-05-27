@@ -56,7 +56,7 @@ function isPrimitive(arg) {
 
 // 仅仅判断自有属性,同时如果参数不是Plain Object
 function isEmptyObj(obj) {
-    if (isPlainObject(obj)) throw Error('Invalid argument: function isEmptyObj need a Plain Object')
+    if (!isPlainObject(obj)) throw Error('Invalid argument: function isEmptyObj need a Plain Object')
 
     return Object.key(obj).length === 0
 }
