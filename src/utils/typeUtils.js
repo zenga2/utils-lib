@@ -59,7 +59,7 @@ define(function (require, exports, module) {
     function isEmptyObj(obj) {
         if (!isPlainObject(obj)) throw Error('Invalid argument: function isEmptyObj need a Plain Object');
 
-        return Object.key(obj).length === 0;
+        return Object.keys(obj).length === 0;
     }
 
     module.exports = {
