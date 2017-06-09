@@ -56,9 +56,9 @@ function bindTouchEvent(option) {
 // 让fn2在fn1执行完后执行,
 // 同时确保fn2的等待时间至少为minInterval
 function executeAfter(fn1, fn2, minInterval) {
-    minInterval = minInterval || 0;
-    let isDone = false;
-    let isTimeout = false;
+    minInterval = minInterval || 0
+    let isDone = false
+    let isTimeout = false
 
     setTimeout(function () {
         // fn1已经执行完了
@@ -67,7 +67,6 @@ function executeAfter(fn1, fn2, minInterval) {
         } else {
             isTimeout = true
         }
-
     }, minInterval)
 
     fn1(function () {
@@ -80,15 +79,99 @@ function executeAfter(fn1, fn2, minInterval) {
 }
 
 function animation(workFn, duration) {
-    let startTime = +(new Date);
+    let startTime = +(new Date())
     requestAnimationFrame(function step() {
-        let currTime = +(new Date);
-        let ratio = (currTime - startTime) / duration;
-        workFn(ratio);
+        let currTime = +(new Date())
+        let ratio = (currTime - startTime) / duration
+        workFn(ratio)
         if (ratio <= 1) {
-            requestAnimationFrame(step);
+            requestAnimationFrame(step)
         }
-    });
+    })
 }
 
-export {each, extend, bindTouchEvent, executeAfter,animation}
+// 设置函数两次运行之间的间隔
+// 例如500ms内函数只能运行一次
+function throttle(fn, interval) {
+    let lastTime = +new Date()
+
+    return function () {
+        let currTime = +new Date()
+        if (currTime - lastTime > interval) {
+            fn.apply(null, arguments)
+        }
+        lastTime = currTime
+    }
+}
+
+function runDelay(fn, interval) {
+    let timeoutId
+    let handle = function () {
+        fn.apply(null, arguments)
+    }
+
+    return function () {
+        // clear last timeout
+        window.clearTimeout(timeoutId)
+        // reset timeout
+        timeoutId = setTimeout(handle, interval)
+    }
+}
+
+function findOverflow() {
+    setTimeout(function () {
+        traverseDom(document.body, function (node) {
+            let parentNode = node.parentNode
+            if (parentNode && parentNode.getBoundingClientRect && node.getBoundingClientRect) {
+                let pRect = parentNode.getBoundingClientRect()
+                let childRect = node.getBoundingClientRect()
+
+                if (childRect.width > pRect.width) {
+                    console.log('overflowX', parentNode, pRect, node, childRect)
+                }
+
+                if (childRect.height > pRect.height) {
+                    console.log('overflowY', parentNode, pRect, node, childRect)
+                }
+            }
+        })
+    }, 2000)
+
+    function traverseDom(node, func) {
+        func(node)
+        node = node.firstChild
+        while (node) {
+            traverseDom(node, func)
+            node = node.nextSibling
+        }
+    }
+}
+
+class CustomError extends Error {
+    constructor(name, message) {
+        super()
+        Object.assign(this, {name, message})
+    }
+}
+
+function downloadFile(url, filename) {
+    let el = document.createElement('a')
+    el.href = url
+    if (filename) {
+        el.download = filename
+    }
+    el.click()
+}
+
+export {
+    each,
+    extend,
+    bindTouchEvent,
+    executeAfter,
+    animation,
+    throttle,
+    runDelay,
+    findOverflow,
+    CustomError,
+    downloadFile
+}

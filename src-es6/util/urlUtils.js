@@ -1,5 +1,5 @@
 import {isEmptyObj} from './typeUtils'
-import {each} from 'utils'
+import {each} from './utils'
 
 // 将url中的查询参数解析成对象
 function urlParse() {
@@ -23,20 +23,22 @@ function serialize(obj) {
     let str = ''
 
     each(obj, function (val, key) {
-        str += `${key}=${val}&`
+        if (val !== undefined) {
+            str += `${key}=${val}&`
+        }
     })
 
     return str && str.slice(0, -1)
 }
 
 // 把数据拼接到URL上
-function addDataToUrl(data, url) {
+function addDataToUrl(url, data) {
     if (data && !isEmptyObj(data)) {
         let str = serialize(data)
         if (url.indexOf('?') === -1) {
             url += '?' + str
         } else {
-            url += "&" + str
+            url += '&' + str
         }
     }
 

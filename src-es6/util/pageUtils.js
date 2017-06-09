@@ -1,4 +1,5 @@
 import {each} from './utils'
+import {firstLetterToUpperCase} from './stringUtils'
 
 // 给元素设置内联样式
 function setCss(el, styleObj) {
@@ -8,11 +9,11 @@ function setCss(el, styleObj) {
         el = document.querySelector(el)
     }
 
-    var bodyStyleObj = document.body.style;
+    let bodyStyleObj = document.body.style;
 
     each(styleObj, function (val, prop) {
         // 判断是否需要加前缀(这里针对的是移动端，所以只考虑webkit)
-        var wProp = 'webkit' + firstLetterToUpperCase(prop)
+        let wProp = 'webkit' + firstLetterToUpperCase(prop)
 
         if (!(prop in bodyStyleObj) && (wProp in bodyStyleObj)) {
             prop = wProp
@@ -21,3 +22,5 @@ function setCss(el, styleObj) {
         el.style[prop] = val
     })
 }
+
+export {setCss}

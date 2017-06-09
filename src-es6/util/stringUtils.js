@@ -14,4 +14,11 @@ function padRight(str, padStr, totalLen) {
     return str.slice(0, totalLen)
 }
 
-export {padLeft, padRight}
+// 把首字母转为大写
+function firstLetterToUpperCase(str) {
+    return str.replace(/^\w/, function (matchStr) {
+        return matchStr.toUpperCase()
+    })
+}
+
+export {padLeft, padRight, firstLetterToUpperCase}
