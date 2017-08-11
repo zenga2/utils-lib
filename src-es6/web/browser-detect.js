@@ -34,8 +34,18 @@ function detect(ua, platform) {
     }
     if (webview) browser.webview = true;
 
-    return {os: os, browser: browser};
+    let system = {
+        isWin: /^Win/.test(platform),
+        isMac: /^Mac/.test(platform),
+        isX11: /^(X11$|Linux)/.test(platform)
+    }
+    system.isPC = system.isWin || system.isMac || system.isX11
+    system.isMobile = !system.isPC
+
+    return {os, browser, system};
 }
 
-let [os, browser] = detect(navigator.userAgent, navigator.platform);
-export {os, browser};
+let [os, browser, system] = detect(navigator.userAgent, navigator.platform);
+
+
+export {os, browser, system};
